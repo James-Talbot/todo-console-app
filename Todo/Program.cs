@@ -3,7 +3,7 @@
     public static void Main(string[] args)
     {
         bool inUse = true;
-        List<string> Todo = new List<string>() { "Clean House", "Feed Dog", "Code"};
+        List<string> Todo = new List<string>() { "Clean House", "Feed Dog", "Code" };
 
         while (inUse)
         {
@@ -21,22 +21,38 @@
             switch (inputInt)
             {
                 case 1:
-                    Console.WriteLine("View Todos");
+                    ViewTodos(Todo);
                     break;
                 case 2:
-                    Console.WriteLine("Add Todo");
+                    Console.Clear();
+                    Console.WriteLine("// Add Todo //");
                     break;
                 case 3:
-                    Console.WriteLine("Remove Todo");
+                    Console.Clear();
+                    Console.WriteLine("// Remove Todo //");
                     break;
                 case 4:
-                    Console.WriteLine("Exit App");
+                    Console.Clear();
+                    Console.WriteLine("Goodbye");
                     inUse = false;
                     break;
                 default:
-                    Console.WriteLine("That is not a valid number");
+                    Console.Clear();
+                    Console.WriteLine("That is not a valid input value!");
+                    Console.WriteLine("");
                     break;
             }
         }
+    }
+
+    static void ViewTodos(List<string> Todo)
+    {
+        Console.Clear();
+        Console.WriteLine("// Current Todos //");
+        for (int i = 0; i < Todo.Count; i++)
+        {
+            Console.WriteLine(" - " +Todo[i]);
+        }
+        Console.WriteLine();
     }
 }
