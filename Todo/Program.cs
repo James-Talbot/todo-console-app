@@ -66,8 +66,8 @@
 
     static void AddTodo(List<string> Todo) 
     {
-        bool inUse = true;
         ViewTodos(Todo);
+        bool inUse = true;
 
         while (inUse) 
         {
