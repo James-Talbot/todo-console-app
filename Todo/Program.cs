@@ -52,7 +52,7 @@
             Console.WriteLine("You Currently Have No Todos");
             Console.WriteLine("");
         }
-        else 
+        else
         {
             Console.WriteLine("// Current Todos //");
             for (int i = 0; i < Todo.Count; i++)
@@ -63,12 +63,12 @@
         }
     }
 
-    static void AddTodo(List<string> Todo) 
+    static void AddTodo(List<string> Todo)
     {
-        bool inUse = true;
         ViewTodos(Todo);
+        bool inUse = true;
 
-        while (inUse) 
+        while (inUse)
         {
             Console.WriteLine("// Add Todo //");
             string todo = Console.ReadLine().ToLower();
@@ -93,7 +93,7 @@
         }
     }
 
-    static void RemoveTodo(List<string> Todo) 
+    static void RemoveTodo(List<string> Todo)
     {
         Console.Clear();
         Console.WriteLine("// Remove Todo //");
