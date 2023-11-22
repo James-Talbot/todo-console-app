@@ -3,7 +3,7 @@
     public static void Main(string[] args)
     {
         bool inUse = true;
-        List<string> Todo = new List<string>() { "Clean House", "Feed Dog", "Code" };
+        List<string> Todo = new List<string>();
 
         while (inUse)
         {
@@ -24,8 +24,7 @@
                     ViewTodos(Todo);
                     break;
                 case 2:
-                    Console.Clear();
-                    Console.WriteLine("// Add Todo //");
+                    AddTodo(Todo);
                     break;
                 case 3:
                     Console.Clear();
@@ -48,11 +47,51 @@
     static void ViewTodos(List<string> Todo)
     {
         Console.Clear();
-        Console.WriteLine("// Current Todos //");
-        for (int i = 0; i < Todo.Count; i++)
+
+        if (Todo.Count == 0)
         {
-            Console.WriteLine(" - " +Todo[i]);
+            Console.WriteLine("You Currently Have No Todos");
+            Console.WriteLine("");
         }
-        Console.WriteLine();
+        else 
+        {
+            Console.WriteLine("// Current Todos //");
+            for (int i = 0; i < Todo.Count; i++)
+            {
+                Console.WriteLine(" - " + Todo[i]);
+            }
+            Console.WriteLine();
+        }
     }
+
+    static void AddTodo(List<string> Todo) 
+    {
+        bool inUse = true;
+        ViewTodos(Todo);
+
+        while (inUse) 
+        {
+            Console.WriteLine("// Add Todo //");
+            string todo = Console.ReadLine().ToLower();
+
+            if (Todo.Contains(todo))
+            {
+                Console.WriteLine("");
+                Console.WriteLine("{0} has already been added!", todo);
+                Console.WriteLine("");
+            }
+            else if (string.IsNullOrEmpty(todo))
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Value Cannot be empty!");
+            }
+            else
+            {
+                Todo.Add(todo);
+                inUse = false;
+                Console.Clear();
+            }
+        }
+    }
+
 }
