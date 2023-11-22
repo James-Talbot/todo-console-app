@@ -27,8 +27,7 @@
                     AddTodo(Todo);
                     break;
                 case 3:
-                    Console.Clear();
-                    Console.WriteLine("// Remove Todo //");
+                    RemoveTodo(Todo);
                     break;
                 case 4:
                     Console.Clear();
@@ -92,6 +91,12 @@
                 Console.Clear();
             }
         }
+    }
+
+    static void RemoveTodo(List<string> Todo) 
+    {
+        Console.Clear();
+        Console.WriteLine("// Remove Todo //");
     }
 
 }
