@@ -3,7 +3,7 @@
     public static void Main(string[] args)
     {
         bool inUse = true;
-        List<string> Todo = new List<string>();
+        List<string> Todo = new List<string>() { "Code", "Test", "Debug" };
 
         while (inUse)
         {
@@ -43,24 +43,35 @@
         }
     }
 
+    static bool checkTodos(List<string> Todo)
+    {
+        if (Todo.Count == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     static void ViewTodos(List<string> Todo)
     {
         Console.Clear();
 
-        if (Todo.Count == 0)
-        {
-            Console.WriteLine("You Currently Have No Todos");
-            Console.WriteLine("");
-        }
-        else
+        if (checkTodos(Todo))
         {
             Console.WriteLine("// Current Todos //");
             for (int i = 0; i < Todo.Count; i++)
             {
                 Console.WriteLine(" - " + Todo[i]);
             }
-            Console.WriteLine();
         }
+        else 
+        {
+            Console.WriteLine("You Currently Have No Todos");
+        }
+        Console.WriteLine("");
     }
 
     static void AddTodo(List<string> Todo)
@@ -97,7 +108,21 @@
     {
         Console.Clear();
         Console.WriteLine("// Remove Todo //");
-        Console.WriteLine("testing github contributions");
-    }
+        
+        for(int i = 0; i < Todo.Count; i++) 
+        {
+            Console.WriteLine("{0} - {1}",i, Todo[i]);
+        }
 
+        Console.WriteLine("Select a todo to delete: ");
+
+        string removeInput = Console.ReadLine();
+        int index = int.Parse(removeInput);
+
+        // TODO - eeception handling
+        Todo.Contains(index.ToString());
+        Console.WriteLine("{0} was deleted from the list!", Todo[index]);
+        Todo.RemoveAt(index);
+        Console.WriteLine("");
+    }
 }
