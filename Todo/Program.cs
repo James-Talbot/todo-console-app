@@ -2,8 +2,10 @@
 {
     public static void Main(string[] args)
     {
+        Console.SetWindowSize(50, 20);
+
+        List<string> Todo = new List<string>() { "code", "test", "refactor" };
         bool inUse = true;
-        List<string> Todo = new List<string>() { "Code", "Test", "Debug" };
 
         while (inUse)
         {
@@ -84,7 +86,7 @@
             Console.WriteLine("// Add Todo //");
             string todo = Console.ReadLine().ToLower();
 
-            if (Todo.Contains(todo))
+            if (Todo.Contains(todo)) // checks if todo exist in list
             {
                 Console.WriteLine("");
                 Console.WriteLine("{0} has already been added!", todo);
@@ -106,23 +108,51 @@
 
     static void RemoveTodo(List<string> Todo)
     {
+        bool inUse = true;
+
         Console.Clear();
         Console.WriteLine("// Remove Todo //");
         
-        for(int i = 0; i < Todo.Count; i++) 
+        while (inUse) 
         {
-            Console.WriteLine("{0} - {1}",i, Todo[i]);
+            if (checkTodos(Todo))
+            {
+                for (int i = 0; i < Todo.Count; i++)
+                {
+                    Console.WriteLine("{0} - {1}", i, Todo[i]);
+                }
+
+                Console.WriteLine("Select a todo to delete: ");
+
+                string removeInput = Console.ReadLine();
+                int index;
+                bool convertedSuccess = int.TryParse(removeInput, out index);
+
+                if (convertedSuccess)
+                {
+                    try
+                    {
+                        Todo.Contains(index.ToString());
+                        Console.WriteLine("{0} was deleted from the list!", Todo[index]);
+                        Todo.RemoveAt(index);
+                        Console.WriteLine("");
+                        inUse = false;
+                    }
+                    catch(ArgumentOutOfRangeException ex) 
+                    {
+                        Console.WriteLine("That is out of range!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid input!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are currently no todos");
+                break;
+            }
         }
-
-        Console.WriteLine("Select a todo to delete: ");
-
-        string removeInput = Console.ReadLine();
-        int index = int.Parse(removeInput);
-
-        // TODO - eeception handling
-        Todo.Contains(index.ToString());
-        Console.WriteLine("{0} was deleted from the list!", Todo[index]);
-        Todo.RemoveAt(index);
-        Console.WriteLine("");
     }
 }
