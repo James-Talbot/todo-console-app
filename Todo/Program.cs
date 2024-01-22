@@ -1,4 +1,5 @@
-﻿class Todo
+﻿using Spectre.Console;
+class Todo
 {
     public static void Main(string[] args)
     {
@@ -38,7 +39,7 @@
                     break;
                 default:
                     Console.Clear();
-                    Console.WriteLine("That is not a valid input value!");
+                    AnsiConsole.MarkupLine("[red] That is not a valid input value! [/]");
                     Console.WriteLine("");
                     break;
             }
@@ -63,7 +64,7 @@
 
         if (checkTodos(Todo))
         {
-            Console.WriteLine("// Current Todos //");
+            AnsiConsole.MarkupLine("[yellow]-----[/] Current Todos [yellow]-----[/]");
             for (int i = 0; i < Todo.Count; i++)
             {
                 Console.WriteLine(" - " + Todo[i]);
@@ -71,7 +72,7 @@
         }
         else 
         {
-            Console.WriteLine("You Currently Have No Todos");
+            AnsiConsole.MarkupLine("[yellow] You Currently Have No Todos [/]");
         }
         Console.WriteLine("");
     }
@@ -83,19 +84,19 @@
 
         while (inUse)
         {
-            Console.WriteLine("// Add Todo //");
+            AnsiConsole.MarkupLine("[yellow]-----[/] Add Todo [yellow]-----[/]");
             string todo = Console.ReadLine().ToLower();
 
             if (Todo.Contains(todo)) // checks if todo exist in list
             {
                 Console.WriteLine("");
-                Console.WriteLine("{0} has already been added!", todo);
+                AnsiConsole.MarkupLine("[red] {0} has already been added! [/]", todo);
                 Console.WriteLine("");
             }
             else if (string.IsNullOrEmpty(todo))
             {
                 Console.WriteLine("");
-                Console.WriteLine("Value Cannot be empty!");
+                AnsiConsole.MarkupLine("[red] Value Cannot be empty! [/]");
             }
             else
             {
@@ -111,7 +112,7 @@
         bool inUse = true;
 
         Console.Clear();
-        Console.WriteLine("// Remove Todo //");
+        AnsiConsole.MarkupLine("[yellow]-----[/] Remove Todo [yellow]-----[/]");
         
         while (inUse) 
         {
@@ -133,24 +134,26 @@
                     try
                     {
                         Todo.Contains(index.ToString());
-                        Console.WriteLine("{0} was deleted from the list!", Todo[index]);
+                        AnsiConsole.MarkupLine("[green]{0} was deleted from the list![/]", Todo[index]);
                         Todo.RemoveAt(index);
                         Console.WriteLine("");
                         inUse = false;
                     }
                     catch(ArgumentOutOfRangeException ex) 
                     {
-                        Console.WriteLine("That is out of range!");
+                        Console.Clear();
+                        AnsiConsole.MarkupLine("[red] That is out of range! [/]");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("That is not a valid input!");
+                    Console.Clear();
+                    AnsiConsole.MarkupLine("[red] That is not a valid input! [/]");
                 }
             }
             else
             {
-                Console.WriteLine("There are currently no todos");
+                AnsiConsole.MarkupLine("[yellow]There are currently no todos[/]");
                 break;
             }
         }
